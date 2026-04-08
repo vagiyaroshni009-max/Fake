@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Review Detector</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        p {
+            line-height: 1.7;
+            color: #444;
+            text-align: justify;
+        }
+
+        .back-btn {
+            display: block;
+            margin-top: 30px;
+            text-align: center;
+            text-decoration: none;
+            background: #3b82f6;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>About Us</h1>
+
+    <p>
+        The rapid proliferation of e-commerce platforms has made online product reviews a cornerstone of consumer decision-making. However, the integrity of these reviews is increasingly compromised by the presence of fake, fabricated, or manipulated content. This project presents an intelligent, machine learning-based framework for the automated detection of fake product reviews on e-commerce platforms.
+    </p>
+
+    <p>
+        The proposed system integrates three key analytical dimensions: sentiment analysis to identify anomalous emotional patterns, content similarity detection to uncover repeated or paraphrased reviews, and review deviation assessment to flag unusual rating distributions and temporal anomalies.
+    </p>
+
+    <p>
+        Advanced classification algorithms, including eXtreme Gradient Boosting (XGBoost) and Support Vector Classifier (SVC), are employed alongside Natural Language Processing (NLP) techniques to model complex textual, behavioral, and statistical features.
+    </p>
+
+    <p>
+        The system is developed using Python as the core programming language, with Flask as the web framework, HTML and CSS for the frontend, and pandas for data manipulation. Experimental evaluation demonstrates significant improvements in precision, recall, and F1-score compared to conventional approaches.
+    </p>
+
+    <p>
+        The system is designed for scalability, real-time monitoring, and adaptability across diverse product categories, contributing to transparency, consumer trust, and fairness in digital marketplaces.
+    </p>
+
+    <a href="{{ url_for('index') }}" class="back-btn">← Back to Home</a>
+</div>
+
+</body>
+</html>

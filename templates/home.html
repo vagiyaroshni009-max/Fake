@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Detector</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-1: #fefefe;
+            --bg-2: #eef4ff;
+            --bg-3: #ffeef6;
+            --text-main: #1d2230;
+            --text-muted: #5c667c;
+            --card-bg: rgba(255, 255, 255, 0.62);
+            --card-border: rgba(255, 255, 255, 0.85);
+            --shadow-soft: 0 14px 34px rgba(73, 90, 132, 0.14);
+            --shadow-btn: 0 8px 22px rgba(63, 82, 128, 0.18);
+            --accent: #3b82f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+    min-height: 100vh;
+    font-family: "Manrope", sans-serif;
+    color: var(--text-main);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Shopping background image with blur */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: url("https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da") no-repeat center/cover;
+    filter: blur(8px);
+    z-index: -5;
+}
+
+/* Light overlay for readability */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: -1;
+}
+
+        .page-wrap {
+            width: min(1180px, 92vw);
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .top-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 0 16px;
+        }
+
+        .brand {
+            font-family: "Sora", sans-serif;
+            font-size: clamp(1.15rem, 1.8vw, 1.35rem);
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .login-btn {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 11px 18px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-btn);
+            transition: 0.2s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            flex: 1;
+            display: grid;
+            place-items: center;
+            text-align: center;
+        }
+
+        .hero-card {
+            width: min(900px, 100%);
+            padding: 50px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(6px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        h1 {
+            font-family: "Sora", sans-serif;
+            font-size: clamp(2rem, 7vw, 5rem);
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 768px) {
+            .hero-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-wrap">
+
+        <!-- Navbar -->
+        <header class="top-nav">
+            <a class="brand" href="{{ url_for('index') }}">Review Detector</a>
+           <div style="display:flex; gap:10px;">
+    <a class="login-btn" href="{{ url_for('about') }}">About Us</a>
+    <a class="login-btn" href="{{ url_for('login') }}">Login / Sign In</a>
+</div>
+        </header>
+
+        <!-- Hero Section -->
+        <main class="hero">
+            <section class="hero-card">
+
+                <!-- ✅ NEW CODE APPLIED HERE -->
+   <h1 style="font-family: 'Times New Roman', Times, serif;">
+    Stop being <span style="color:#3b82f6;">fooled</span>
+</h1>
+
+<p style="font-family: 'Times New Roman', Times, serif;">
+    Our AI analyzes linguistic patterns and review history to detect fake product review feedback on E-commerce platforms.
+</p>
+
+            </section>
+        </main>
+
+    </div>
+</body>
+</html>

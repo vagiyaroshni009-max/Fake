@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Review Detector - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="dashboard-page">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <h2>Fake Review Detector</h2>
+            </div>
+            <div class="navbar-menu">
+                <ul>
+                    <li><a href="#" class="nav-link">Dashboard</a></li>
+                    <li><a href="#history" class="nav-link">History</a></li>
+                    <li><a href="{{ url_for('logout') }}" class="nav-link">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="dashboard-container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Analyze Product Reviews</h1>
+                <p>Use AI to detect fake reviews and analyze sentiment</p>
+            </div>
+        </section>
+        
+        <!-- Input Section -->
+        <section class="input-section">
+            <div class="input-card">
+                <h2>Enter Product URL</h2>
+                
+                <form id="analyzeForm" class="analyze-form">
+                    <div class="platform-group">
+                        <label for="platformSelect">Select Platform</label>
+                        <select id="platformSelect">
+                            <option value="auto">Auto Detect</option>
+                            <option value="amazon">Amazon</option>
+                            <option value="flipkart">Flipkart</option>
+                            <option value="shopsy">Shopsy</option>
+                            <option value="meesho">Meesho</option>
+                            <option value="myntra">Myntra</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <input 
+                            type="url" 
+                            id="productUrl" 
+                            placeholder="Paste product URL (Amazon, Flipkart, Shopsy, Meesho, Myntra)"
+                            required
+                        >
+                        <button type="submit" class="btn btn-primary">Analyze</button>
+                    </div>
+                    <div id="urlError" class="error-message"></div>
+                </form>
+                
+                <div class="divider">OR</div>
+                
+                <button id="sampleBtn" class="btn btn-secondary btn-block">
+                    Use Sample Data
+                </button>
+            </div>
+        </section>
+        
+        <!-- Loading State -->
+        <div id="loadingSection" class="loading-section" style="display:none;">
+            <div class="spinner"></div>
+            <p>Analyzing reviews...</p>
+        </div>
+        
+        <!-- Results Section -->
+        <section id="resultsSection" class="results-section" style="display:none;">
+            <!-- Summary Stats -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-label">Total Reviews</div>
+                    <div class="stat-value" id="totalReviews">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Genuine</div>
+                    <div class="stat-value stat-genuine" id="genuineCount">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Fake</div>
+                    <div class="stat-value stat-fake" id="fakeCount">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Fake %</div>
+                    <div class="stat-value" id="fakePercentage">0%</div>
+                </div>
+            </div>
+            
+            <!-- Reviews List -->
+            <div class="reviews-container">
+                <h2>Review Analysis Results</h2>
+                <div id="reviewsList" class="reviews-list"></div>
+            </div>
+
+            <!-- Reviewer Insights Add-on -->
+            <div id="reviewerInsightsSection" class="reviewer-insights-container" style="display:none;">
+                <h2>Reviewer Insights</h2>
+
+                <div class="insight-stats-grid">
+                    <div class="insight-stat-card">
+                        <div class="stat-label">Total Reviews</div>
+                        <div class="stat-value" id="insightTotalReviews">0</div>
+                    </div>
+                    <div class="insight-stat-card">
+                        <div class="stat-label">Total Reviewers</div>
+                        <div class="stat-value" id="insightTotalReviewers">0</div>
+                    </div>
+                    <div class="insight-stat-card">
+                        <div class="stat-label">Positive vs Negative</div>
+                        <div class="insight-pair">
+                            <span id="insightPositiveCount">0</span>
+                            <span>/</span>
+                            <span id="insightNegativeCount">0</span>
+                        </div>
+                    </div>
+                    <div class="insight-stat-card">
+                        <div class="stat-label">Genuine vs Fake</div>
+                        <div class="insight-pair">
+                            <span id="insightGenuineCount">0</span>
+                            <span>/</span>
+                            <span id="insightFakeCount">0</span>
+                        </div>
+                    </div>
+                    <div class="insight-stat-card">
+                        <div class="stat-label">Verified Purchases</div>
+                        <div class="stat-value" id="insightVerifiedPurchases">N/A</div>
+                    </div>
+                </div>
+
+                <div class="insight-charts-grid">
+                    <div class="insight-chart-card">
+                        <h3>Genuine vs Fake</h3>
+                        <canvas id="genuineFakePieChart" width="320" height="220" aria-label="Genuine vs Fake Pie Chart"></canvas>
+                    </div>
+                    <div class="insight-chart-card">
+                        <h3>Positive vs Negative</h3>
+                        <canvas id="positiveNegativeBarChart" width="320" height="220" aria-label="Positive vs Negative Bar Chart"></canvas>
+                    </div>
+                </div>
+
+                <div class="insight-lists-grid">
+                    <div class="insight-list-card">
+                        <h3>Top Positive Reviewers</h3>
+                        <ul id="topPositiveReviewersList" class="insight-list"></ul>
+                    </div>
+                    <div class="insight-list-card">
+                        <h3>Suspicious Reviewers</h3>
+                        <ul id="suspiciousReviewersList" class="insight-list"></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- History Section -->
+        <section id="historySection" class="history-section" style="display:none;">
+            <h2>Previous Analysis</h2>
+            <div id="historyList" class="history-list"></div>
+        </section>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Fake Review Detector. All rights reserved.</p>
+    </footer>
+    
+    <!-- Delete Review Card Modal -->
+    <div id="reviewModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
